@@ -16,6 +16,7 @@ bot.
 """
 
 import logging
+import requests
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
@@ -54,8 +55,18 @@ def personalizado(update, context):
             update.message.reply_text("No entiendo")
 
 def movie(update, context):
-    """Send a message when the command /help is issued."""
-    update.message.reply_text('Movie!')
+    """
+    request('http://www.omdbapi.com/?apikey=59022c1b&t=${movie}',function(error,response,body){
+        if(!error && response.statusCode == 200){
+            update.message.reply_text('Looking for _' + movie + '...', {parse_mode: 'Markdown'})
+            update.message.reply_text('Result:\n ' + body)
+        }"""    
+
+    movie = update.message.text
+    r = requests.get("http://www.omdbapi.com/?apikey=59022c1b&t=" + movie)
+    #print (r.url)
+    print (r.content)
+
         
 
 def main():
