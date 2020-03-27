@@ -65,7 +65,8 @@ def movie(update, context):
     movie = update.message.text()
     r = requests.get("http://www.omdbapi.com/?apikey=59022c1b&t=" + movie)
     #print (r.url)
-    print (r.content)
+    #print (r.content)
+    update.message.reply_text(r.content)
 
         
 
