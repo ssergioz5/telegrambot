@@ -62,7 +62,7 @@ def movie(update, context):
             update.message.reply_text('Result:\n ' + body)
         }"""    
 
-    movie = update.message.text
+    movie = update.message.text()
     r = requests.get("http://www.omdbapi.com/?apikey=59022c1b&t=" + movie)
     #print (r.url)
     print (r.content)
