@@ -17,6 +17,7 @@ bot.
 
 import logging
 import requests
+import json
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
@@ -65,9 +66,10 @@ def movie(update, context):
     movie = update.message.text()
     r = requests.post("http://www.omdbapi.com/?apikey=59022c1b&t=" + movie)
     #print (r.content)
-    print (r.json())
-    update.message.reply_text(r.json())
-
+    #print (r.json())
+    #update.message.reply_text(r.json())
+    y = json.loads(r.content)
+    print(y["Title"])
         
 
 def main():
