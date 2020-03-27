@@ -52,6 +52,14 @@ def error(update, context):
 def personalizado(update, context):
         if(update.message.text.upper().find("SERGIO") > 0):
             update.message.reply_text("Hola Sergio, cómo estas?")
+        if(update.message.text.upper().find("IRONMAN") > 0):
+            movie = update.message.text()
+            r = requests.post("http://www.omdbapi.com/?apikey=59022c1b&t=" + movie)
+            #print (r.content)
+            #print (r.json())
+            #update.message.reply_text(r.json())
+            y = json.loads(r.content)
+            print(y["Title"])
         else:
             update.message.reply_text("No entiendo")
 
@@ -85,7 +93,7 @@ def main():
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
-    dp.add_handler(CommandHandler("movie", movie))
+    #dp.add_handler(CommandHandler("movie", movie))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, personalizado))
